@@ -1,0 +1,918 @@
+@charset 'utf-8';
+@use '_reset';
+
+$primary-color: #eb51c2;
+$en-font: 'Josefin Sans', sans-serif;
+
+$breakpoints: (
+    //キー : 値
+    "sp": "(max-width: 767px)",
+    "tab": "(min-width: 768px) and (max-width: 999px)",
+    "pc": "(min-width: 1000px)"
+) !default;//この変数が他で定義されていない場合のみ適用
+
+@mixin mq($breakpoint: sp) {
+    //map-get(マップ型変数, キー)で値を取得
+    @media #{map-get($breakpoints, $breakpoint)} {
+        @content;
+    }
+}
+
+
+body {
+    font-family: "Hiragino Kaku Gothic ProN",
+        "Hiragino Sans", Meiryo, sans-serif;
+    font-size: 15px;
+    line-height: 1;
+    letter-spacing: 0.05em;
+    @include mq(sp) {
+        font-size: 14px;
+        letter-spacing: 0;
+    }
+}
+
+p {
+    line-height: 1.8;
+    @include mq(sp) {
+        line-height: 1.7;
+    }
+}
+
+
+
+.black-color {
+    color: #000;
+}
+
+.conversion-btn {
+    display: inline-block;
+    width: 370px;
+    font-size: 20px;
+    padding: 25px 45px;
+    border-radius: 50px;
+    background-color: $primary-color;
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    text-align: center;
+    @include mq(sp) {
+        width: 220px;
+        font-size: 13px;
+        padding: 20px 10px;
+    }
+}
+
+
+
+//////////////////////////////////////////////////////////////////////
+// ヘッダー始まり
+//////////////////////////////////////////////////////////////////////
+.header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 80px;
+    padding: 0 35px;
+    line-height: 1;
+    letter-spacing: 0.05em;
+    position: fixed;
+    z-index: 100;
+    transition: 0.3s;
+    @include mq("sp") {
+        height: 60px;
+        padding: 0 20px;
+    }
+}
+
+.header__logo {
+    width: 180px;
+    @include mq(sp) {
+        width: 96px;
+    }
+}
+
+.header .header__conversion-btn {
+    font-size: 15px;
+    padding: 15px 10px;
+    @include mq(sp) {
+        width: 200px;
+        font-size: 12px;
+        padding: 12px 15px;
+    }
+}
+
+
+
+//////////////////////////////////////////////////////////////////////
+// メインビジュアル始まり
+//////////////////////////////////////////////////////////////////////
+
+.mv {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1800px;
+    height: 680px;
+    position: relative;
+    margin: 0 auto;
+    @include mq(sp) {
+        height: 55vh;
+    }
+}
+
+.mv__text {
+    position: absolute;
+    left: 12%;
+    top: 35%;
+    z-index: 10;
+    font-size: clamp(2.5rem, 1.458rem + 4.76vw, 5.625rem);
+    @include mq(sp) {
+        top: 45%;
+        left: 5%;
+}
+}
+.mv__title {
+    font-family: $en-font;
+    font-size: clamp(2.5rem, 1.458rem + 4.76vw, 5.625rem);
+    line-height: 1;
+    font-style: italic;
+    margin-bottom: 20px;
+    @include mq(sp) {
+        margin-bottom: 10px;
+    }
+}
+
+
+.primary-color {
+    color: $primary-color;
+    @include mq(sp) {
+        font-size: 0.8em;
+    }
+}
+
+.mv__subtitle {
+    font-size: min(3.5vw, 28px);
+    font-weight: bold;
+    margin-bottom: 30px;
+    @include mq(sp) {
+        margin-bottom: 15px;
+    }
+
+}
+
+
+.underline {
+    background-color: #fff;
+}
+
+.mv__img {
+    background-image: url(../img/bg_mv.png);
+    opacity: 0;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    width: 70%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: -1;
+    border-radius: 0 0 0 90px;
+    animation: 1s fadeInMvImg 0.2s forwards;
+    @include mq(sp) {
+        height: 410px;
+    }
+}
+
+@keyframes fadeInMvImg {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+
+//////////////////////////////////////////////////////////////////////
+// イントロ始まり
+//////////////////////////////////////////////////////////////////////
+
+.intro {
+    text-align: center;
+    margin-top: 100px;
+    margin-bottom: 50px;
+    @include mq(sp) {
+        margin-top: 60px;
+        padding: 0 20px;
+    }
+}
+
+.intro__title {
+    font-family: $en-font;
+    color: $primary-color;
+    font-style: italic;
+    font-size: 108px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    line-height: 0.8;
+    @include mq(sp) {
+        font-size: 56px;
+        line-height: 1;
+        margin-bottom: 0;
+    }
+}
+
+.sp-br {
+    display: none;
+    @include mq(sp) {
+        display: block;
+    }
+}
+
+.intro__subtitle {
+    color: $primary-color;
+    font-size: clamp(1rem, 0.588rem + 1.88vw, 2rem);
+    font-weight: bold;
+    letter-spacing: 0.1em;
+    margin-bottom: 25px;
+
+}
+
+
+
+.intro__discription {
+    max-width: 720px;
+    margin: 0 auto;
+    font-size: 16px;
+    line-height: 2;
+    @include mq(sp) {
+        font-size: 15px;
+        line-height: 1.8;
+        text-align: left;
+    }
+
+}
+
+//////////////////////////////////////////////////////////////////////
+// アピール始まり
+//////////////////////////////////////////////////////////////////////
+
+.appeal {
+    max-width: 1300px;
+    margin: 0 auto 50px;
+}
+
+.appeal-contents {
+    position: relative;
+    margin-bottom: 100px;
+    @include mq(sp) {
+        margin-bottom: 50px;
+    }
+}
+
+.appeal-contents--food {
+    display: flex;
+    justify-content: flex-end;
+    @include mq(sp) {
+        flex-direction: column;
+    }
+}
+
+.appeal-img {
+    width: 70%;
+    @include mq(sp) {
+        width: 100%;
+    }
+}
+
+.appeal-contents__box {
+    opacity: 0;
+    padding: 60px;
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 555px;
+    position: absolute;
+    z-index: 2;
+    @include mq(sp) {
+        position: static;
+        margin: -10px 20px;
+        padding: 40px 30px 30px;
+        border-radius: 10px;
+    }
+
+}
+
+.appeal-contents__box--training {
+    bottom: -30px;
+    right: 20px;
+}
+
+.appeal-contents__box--food {
+    bottom: -30px;
+    left: 20px;
+}
+
+.appeal-title {
+    font-family: $en-font;
+    font-size: 32px;
+    font-weight: bold;
+    line-height: 1.5;
+    margin-bottom: 15px;
+    @include mq(sp) {
+        font-size: 22px;
+    }
+}
+
+.appeal-subtitle {
+    font-family: $en-font;
+    color: $primary-color;
+    font-size: 24px;
+    margin-bottom: 20px;
+    @include mq(sp) {
+        font-size: 18px;
+    }
+}
+
+.appeal-subtitle--green {
+    color: #00b21b;
+}
+
+.appeal-contents__discription {}
+
+.conversion-btn--center {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+//////////////////////////////////////////////////////////////////////
+// チーム始まり
+//////////////////////////////////////////////////////////////////////
+.wave {
+    text-align: center;
+}
+
+.wave__img {
+    width: 100%;
+
+}
+
+.wave--bottom {
+    // margin-top: -80px;
+}
+
+.container {
+    margin: 0 auto 80px;
+    padding: 0 30px;
+    max-width: 1170px;
+}
+
+.title {
+    font-family: $en-font;
+    font-size: 64px;
+    padding: 0;
+    margin-bottom: 10px;
+    @include mq(sp) {
+        font-size: 40px;
+        padding-top: 30px;
+    }
+}
+
+.subtitle {
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 30px;
+    @include mq(sp) {
+        font-size: 14px;
+    }
+}
+
+
+.team {
+    background-color: $primary-color;
+    padding-bottom: 10px;
+}
+
+.team-title {
+    color: white;
+}
+
+
+
+.team-subtitle {
+    color: #fff;
+}
+
+
+
+.team-select {
+    margin: 35px 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    font-size: 18px;
+    color: #fff;
+    cursor: pointer;
+    @include mq(sp) {
+        font-size: 15px;
+    }
+
+}
+
+.team-select__item {
+    position: relative;
+    text-align: center;
+}
+
+.team-person__boxes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    @include mq(sp) {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+.team-person__box {
+    opacity: 0;
+    background-color: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+
+.team-person__img {}
+
+.team-person__greeting {
+    padding: 20px;
+}
+
+
+
+//////////////////////////////////////////////////////////////////////
+// スタジオ始まり
+//////////////////////////////////////////////////////////////////////
+.studio {
+    max-width: 1170px;
+    padding: 0 20px;
+    margin: 0 auto 80px;
+}
+
+.studio-title {}
+
+.studio-subtitle {
+    color: $primary-color;
+}
+
+.studio__img {}
+
+
+
+//////////////////////////////////////////////////////////////////////
+// 料金始まり
+//////////////////////////////////////////////////////////////////////
+.price {
+    background-color: $primary-color;
+    padding-bottom: 10px;
+}
+
+.price-title {
+    color: #fff;
+}
+
+.price-subtitle {
+    color: #fff;
+}
+
+.price-boxes {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+
+    //横スクロール用
+    white-space: nowrap;
+    
+    @include mq(sp) {
+        margin-top: -30px;
+        padding-top: 40px;
+        gap: 15px;
+        position: relative;
+        overflow-x: auto;
+    }
+}
+.price-box {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px 20px 0;
+    text-align: center;
+    position: relative;
+    @include mq(sp) {
+        width: 320px;
+    }
+}
+
+.price-content--head {
+    padding: 20px 0;
+}
+
+.price-content {
+    padding: 30px 0;
+    border-top: 1px solid #ccc;
+}
+
+.price-box__title {
+    color: $primary-color;
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.price-box__price {
+    font-size: 45px;
+    font-family: $en-font;
+
+}
+
+.price-box__price-sub {
+    font-size: 16px;
+}
+
+.price-content__title {
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.price-content__discription {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.price-box__recommend {
+    color: $primary-color;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 10px;
+    width: 80%;
+    background-color: #fff;
+    border: 2px solid $primary-color;
+    border-radius: 50px;
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.price-box__recommend p{
+    line-height: 1;
+}
+
+@include mq(sp) {
+.price-list__scroll {
+    position: absolute;
+    top: 50%;
+    right: 5%;
+    font-size: 12px;
+    color: #fff;
+    padding: 10px;
+    transform: translateY(-50%);
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+.price-list__scroll-text {
+    display: block !important;
+    font-size: 40px !important;
+    text-align: center;
+}
+}
+
+//////////////////////////////////////////////////////////////////////
+// FAQ始まり
+//////////////////////////////////////////////////////////////////////
+.faq {}
+
+.faq-subtitle {
+    color: $primary-color;
+}
+
+.icon {
+    color: $primary-color;
+    font-family: $en-font;
+    font-size: 26px;
+    font-weight: bold;
+}
+
+.faq-contents {
+    border-bottom: 1px solid #ccc;
+}
+
+
+
+.faq-question__inner {
+    padding: 10px 0 15px;
+    position: relative;
+    }
+
+
+.faq-question__inner::after{
+    display: block;
+    content: 'expand_more';
+    position: absolute;
+    top: 50%;
+    right: 0;
+    font-family: "Material Icons Round";
+    font-size: 24px;
+    color: $primary-color;
+    transform: translateY(-50%);
+}
+.accordion__question.active .faq-question__inner::after {
+    content: "expand_less";
+}
+
+
+.faq-question__inner,
+.faq-answer__inner {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.faq-answer{
+    display: none;
+}
+
+.faq-answer__inner {
+    padding: 0 0 20px;
+}
+
+
+
+
+//////////////////////////////////////////////////////////////////////
+// コンバージョン始まり
+//////////////////////////////////////////////////////////////////////
+
+.conversion {
+    background-color: $primary-color;
+    width: 100%;
+    text-align: center;
+}
+
+.cta {
+    padding: 50px 0;
+}
+
+.footer__text {
+    font-family: $en-font;
+    color: #fff;
+    font-size: 64px;
+    margin-bottom: 15px;
+    @include mq(sp) {
+        font-size: 35px;
+    }
+}
+
+.conversion-btn--bottom {
+    background-color: #fff;
+    color: $primary-color;
+}
+
+
+/// //////////////////////////////////////////////////////////////////////
+// フッター始まり
+//////////////////////////////////////////////////////////////////////
+
+.footer {
+    text-align: center;
+    background-color: #000;
+    padding: 100px 0;
+}
+
+/// //////////////////////////////////////////////////////////////////////
+// jsの記述
+//////////////////////////////////////////////////////////////////////
+
+//ヘッダー消したり
+.header--active{
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.header__conversion-btn{
+    display: none;
+}
+.header--active .header__conversion-btn {
+    display: block;
+}
+
+
+//mvのアニメーション
+.bgLRextendTrigger{
+    opacity: 0;
+}   
+.bgLRextend{
+    position: relative;
+    overflow: hidden;
+    animation-name: textBGwhitecolor;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes textBGwhitecolor{
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+
+.bgLRextend::before{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: $primary-color;
+    animation-name: textBGAnime;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes textBGAnime{
+    0% {
+        transform: scaleX(0);
+        transform-origin: left;
+    }
+    
+    50% {
+        transform: scaleX(1);
+        transform-origin: left;
+    }
+    50.001% {
+        transform-origin: right;
+    }
+    100% {
+        transform: scaleX(0);
+        transform-origin: right;
+    }
+}
+
+.bgappear{
+    opacity: 0;
+    background-color: #fff;
+    animation-name: textBGprimarycolor;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    animation-delay: 0.6s;
+}
+@keyframes textBGprimarycolor{
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+
+
+// フェードイン
+.fadeUp {
+    animation: fadeUp 0.8s cubic-bezier(0.33, 0, 0.68, 1) 1 forwards;
+
+}
+
+@keyframes fadeUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+
+//タブ切り替え
+.tab-content {
+    display: none;
+}
+
+.tab-content.show {
+    display: block;
+}
+
+.tab--active {
+    font-weight: bold;
+}
+
+.tab--active::before {
+    content: '';
+    width: 100%;
+    height: 3px;
+    background-color: #fff;
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+}
+
+
+
+// スライダー
+.swiper {
+    position: relative;
+    text-align: center;
+}
+
+.swiper-wrapper {
+    width: 100%;
+    height: 300px;
+}
+
+// スライダーボタン
+.swiper-button-prev.swiper-button-prev,
+.swiper-button-next.swiper-button-next {
+    background-color: #fff !important;
+    width: 60px !important;
+    height: 60px !important;
+    border-radius: 50% !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    margin-top: 0 !important; // Swiperのデフォルトマージンを解除
+    position: absolute;
+}
+
+.swiper-button-prev.swiper-button-prev {
+    left: -20px !important;
+}
+
+.swiper-button-next.swiper-button-next {
+    right: -20px !important;
+}
+
+// ボタンの矢印アイコンのスタイル調整
+.swiper-button-prev::after,
+.swiper-button-next::after {
+    
+    font-size: 24px !important;
+    font-weight: bold;
+    color: $primary-color;
+}
+
+.swiper-button-prev::after {
+    content: 'navigate_before';
+}
+
+.swiper-button-next::after {
+    content: 'navigate_next';
+}
+
+
+
+/// //////////////////////////////////////////////////////////////////////
+// ページトップ
+//////////////////////////////////////////////////////////////////////
+.page-top {
+    display: none;
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 100;
+  }
+  
+  .page-top__link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    transition: opacity 0.3s;
+    border-radius: 50%;
+    background-color: #fff;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    @include mq(sp) {
+        width: 40px;
+        height: 40px;
+    }
+  }
+  
+  .page-top__icon {
+    font-size: 48px !important;
+    color: $primary-color;
+    @include mq(sp) {
+        font-size: 25px !important;
+    }
+  }
+  
+  .page-top__link:hover {
+    opacity: 0.8;
+  }
+
+/// //////////////////////////////////////////////////////////////////////
+// ハンバーガーメニュー終わり
+//////////////////////////////////////////////////////////////////////
